@@ -10,13 +10,14 @@ class Controller:
     self.P_gain = proportional_gain
     self. I_gain = integral_gain
     self. D_gain = derivative_gain
+    self. difference = measured_process_variable - set_point
 
   def control(self):
-    controller_output = self.set_point + 2
+    controller_output = self.difference + 2 * self.D_gain
     return controller_output
 
 
-class Output:
+class Process:
   def __init__(self, controller_output, disturbance):
     self.process_variable = controller_output + disturbance
 
@@ -24,11 +25,27 @@ class Output:
 measured_process_variable = 0
 Input = Input(measured_process_variable)
 
+
+measured_process_variable = 10
 set_point = 5
-Controller = Controller(Input.measured_process_variable, set_point, 5, 1, 1)
+proportional_gain = 30
+integral_gain = 40
+derivative_gain = 32
+Controller = Controller(measured_process_variable, set_point, proportional_gain, integral_gain, derivative_gain)
 
-disturbance = 100
-Output = Output(Controller.control(), disturbance)
+controller_output = Controller.control()
 
-print(Output.process_variable)
+
+controller_output = 30
+disturbance = 0
+disturbance_array = [109, 23, 32, 43, 54]
+Process = Process(controller_output, disturbance)
+process_variable = Process.process_variable
+
+
+
+for n in disturbance_array:
+  disturbance = n
+  measured_process_variable = process_variable
+  print(disturbance, measured_process_variable, set_point, controller_output, process_variable)
 
