@@ -4,8 +4,8 @@ import scipy.integrate as integrate
 
 
 class Input:
-  def __init__(self, measured_process_variable):
-    self.measured_process_variable = measured_process_variable
+  def __init__(self, process_variable):
+    self.measured_process_variable = process_variable
 
 
 class PID_Controller:
@@ -33,6 +33,18 @@ class Output_Process:
 
 
 process_variable_pool = [0]
+measured_variable_pool = [0]
+controller_output = [0]
+disturbance = [0]
+
+input = Input(process_variable_pool[0])
+measured_variable_pool.insert(0, input.measured_process_variable)
+del measured_variable_pool[-1]
+
+
+output = Output_Process(controller_output[0], disturbance[0])
+process_variable_pool.insert(0, output.process_variable)
+del process_variable_pool[-1]
 
 
 for n in range(10):
