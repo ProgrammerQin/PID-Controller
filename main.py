@@ -39,27 +39,16 @@ disturbance = [0]
 
 input = Input(process_variable_pool[0])
 measured_variable_pool.insert(0, input.measured_process_variable)
-del measured_variable_pool[-1]
+if len(measured_variable_pool) > 10:
+    del measured_variable_pool[-1]
 
 
 output = Output_Process(controller_output[0], disturbance[0])
 process_variable_pool.insert(0, output.process_variable)
-del process_variable_pool[-1]
+if len(process_variable_pool) > 10:
+    del process_variable_pool[-1]
 
 
-for n in range(10):
-    measured_process_variable = process_variable_pool[0]
-#   Input = Input(measured_process_variable)
-    set_point = 5
-    Kp = 30
-    Ki = 40
-    Kd = 32
-    Controller = PID_Controller(measured_process_variable, set_point, Kp, Ki, Kd)
-    controller_output = [0, Controller.control()]
-    disturbance_array = [109, 23, 32, 43, 54, 213, 12, 213, 2, 34]
-    Process = Output_Process(controller_output[-1], disturbance_array[n])
-    process_variable = Process.process_variable
-    process_variable_pool.append(process_variable)
 
 
 #   Visualize PID Control Process
