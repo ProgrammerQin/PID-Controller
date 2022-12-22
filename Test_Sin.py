@@ -4,12 +4,14 @@ import matplotlib.pyplot as plot
 
 # Get x values of the sine wave
 
-time = np.arange(0, 10, 0.1);
+time = np.arange(0, 10, 0.1)
 
 # Amplitude of the sine wave is sine of a variable like time
 
 amplitude = np.sin(time)
-
+# test = []
+# test.insert(0, amplitude)
+print(amplitude[4])
 # Plot a sine wave using time and amplitude obtained for the sine wave
 
 plot.plot(time, amplitude)
@@ -29,9 +31,5 @@ plot.ylabel('Amplitude = sin(time)')
 plot.grid(True, which='both')
 
 plot.axhline(y=0, color='k')
-
-plot.show()
-
-# Display the sine wave
 
 plot.show()
