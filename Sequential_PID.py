@@ -17,9 +17,9 @@ class PID_Controller:
     self.C = 0
     self.set_point = set_point
     self.difference = setpoint - measured_process_variable
-    self.P_gain = 0.5
-    self.I_gain = 0
-    self.D_gain = 0
+    self.P_gain = 1.3
+    self.I_gain = 0.2
+    self.D_gain = 0.05
     self.dt = 1
     self.P = self.P_gain * self.difference
     self.I = self. I_gain * self.difference * self.dt
