@@ -17,9 +17,9 @@ class PID_Controller:
     self.C = 1
     self.set_point = set_point
     self.difference = setpoint - measured_process_variable
-    self.P_gain = 3
-    self.I_gain = 3
-    self.D_gain = 3
+    self.P_gain = 0.5
+    self.I_gain = 0
+    self.D_gain = 0
     self.dt = 1
     self.P = self.P_gain * self.difference
     self.I = self. I_gain * self.difference * self.dt
@@ -27,7 +27,7 @@ class PID_Controller:
 
 
   def control(self):
-    controller_output = self.P + self.I * + self.D
+    controller_output = self.P + self.I + self.D
     round(controller_output, 2)
     return controller_output
 
@@ -74,15 +74,12 @@ while n < 10:
   print("n:", n, "Output.process_variable", output.process_variable)
 
 
-# test_disturbance = [4, 2, 6, 75, 54, 34, 34, 32, 23]
-test_disturbance = 30
-# test_process_variable = [1, 4, 5, 6, 2, 4, 23, 12, 12]
 print(plot_process_variable)
 
 #   Visualize PID Control Process
 # plt.plot(time, disturbance, setpoint, process_variable_pool[0])
 plt.axhline(y = setpoint, color = 'k', label = 'Setpoint')
-plt.axhline(y = test_disturbance, color = 'g', label = 'Disturbance')
+plt.axhline(y = disturbance, color = 'g', label = 'Disturbance')
 # plt.plot(test_disturbance, color = 'g', label = 'Disturbance')
 plt.plot(plot_process_variable, color = 'k', label = 'Process')
 plt.title('PID Control Process')
