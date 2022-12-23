@@ -23,7 +23,7 @@ class Input(threading.Thread):
     return measured_variable_pool
 
 
-# Controller Object using input, feedback and setpoint to adjust controller signal
+# Controller Object using input + feedback and setpoint to adjust controller signal
 class PID_Controller(threading.Thread):
   def __init__(self, measured_process_variable, set_point):
     threading.Thread.__init__(self)
@@ -31,9 +31,9 @@ class PID_Controller(threading.Thread):
     self.C = 0
     self.set_point = set_point
     self.difference = setpoint - measured_process_variable
-    self.P_gain = 0.8
-    self.I_gain = 0.05
-    self.D_gain = 0.02
+    self.P_gain = 1.5
+    self.I_gain = 0.2
+    self.D_gain = 0.13
     self.dt = 1
     self.P = self.P_gain * self.difference
     self.I = self. I_gain * self.difference * self.dt
@@ -81,7 +81,6 @@ disturbance = [0]
 plot_process_variable = [0]
 
 setpoint = 15
-controller_signal = 0
 
 
 # Try Different Disturbance Situations to verify PID Module
@@ -107,12 +106,12 @@ while n < 10:
   controller_signal_pool =PID_Controller(measured_variable_pool[0], setpoint).run()
   process_variable_pool = Output_Process(process_variable_pool[0], controller_signal_pool[0], disturbance).run()
   plot_process_variable = Output_Process(process_variable_pool[0], controller_signal_pool[0], disturbance).plot()
-  n = n + 0.5
+  n = n + 0.2
 
 
 #   Visualize PID Control Process
 plt.axhline(y = setpoint, color = 'k', label = 'Setpoint')
-plt.axhline(y = disturbance, color = 'g', label = 'Disturbance')
+# plt.axhline(y = disturbance, color = 'g', label = 'Disturbance')
 plt.plot(plot_process_variable, color = 'pink', label = 'Process')
 plt.title('PID Control Process')
 plt.xlabel('Time')
@@ -120,4 +119,3 @@ plt.ylabel('Amplitude')
 plt.grid(True, which='both')
 plt.legend()
 plt.show()
-
