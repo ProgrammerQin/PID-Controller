@@ -1,6 +1,6 @@
 # PID-Controller
 
-An OOP based application which implements PID control loop with Parallel Programming philosoph
+An OOP based application which implements PID control loop with Parallel Programming philosoph and techniques
 Each object (input, PID control and output) is responsible for their tasks independently
 
 The input object is responsible for generating input to the system. It simply provides an array of numbers to be supplied as input.
