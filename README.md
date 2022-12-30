@@ -12,3 +12,4 @@ The control object calculates the proportional, derivative, and integral term va
 
 Each object does all processing on separate threads.
 
+![Screen Shot 2022-12-30 at 2 24 08 PM](https://user-images.githubusercontent.com/86066883/210105491-ecca268e-b341-4a13-ba79-df62ddaece41.png)
